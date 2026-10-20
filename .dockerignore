@@ -1,0 +1,9 @@
+.git/
+.gitignore
+.dockerignore
+build-classes/
+**/*.class
+web/WEB-INF/classes/
+.env
+.env.*
+!.env.example

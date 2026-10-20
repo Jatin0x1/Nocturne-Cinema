@@ -58,6 +58,31 @@ Start Tomcat from the VS Code terminal if it is not already running:
 
 Open <http://localhost:8080/MovieTicketBooking/> in a browser. For code changes, compile again and copy the updated `web` contents to the same application directory; reload the application or restart Tomcat if needed.
 
+## Deploy with Docker on Render
+
+The Docker image compiles the Java files in `src` against the Servlet API included with Tomcat 9, then places the compiled classes in `WEB-INF/classes`. It copies the contents of `web` directly into Tomcat's `ROOT` application, so the deployed site opens at `/` without a `/web/` segment. Tomcat runs in the foreground and listens on Render's `PORT` (with `10000` as the local default).
+
+### Run locally with Docker
+
+Install and start Docker Desktop, then run these commands from the project folder:
+
+```powershell
+docker build -t nocturne-cinema .
+docker run --rm -p 10000:10000 -e PORT=10000 nocturne-cinema
+```
+
+Open <http://localhost:10000/>. Stop the container with `Ctrl+C`.
+
+### Deploy to Render
+
+1. Push this project to a GitHub repository.
+2. In Render, choose **New +** → **Web Service**, connect the repository, and select the branch to deploy.
+3. Select the **Docker** runtime. Keep the Dockerfile path as `./Dockerfile` and the build context as the repository root.
+4. Create the web service. Render supplies the `PORT` environment variable; no database or additional environment variables are required.
+5. Open the `onrender.com` URL shown on the service page. The app is served from the root path.
+
+Render rebuilds the image from the repository when you deploy a new commit. The in-memory catalogue, seat occupancy, and session bookings are not persistent storage and can reset when the service restarts or a new instance handles a visitor.
+
 ## Project structure
 
 ```text
@@ -74,6 +99,9 @@ MovieTicketBooking/
 │   ├── images/                 Local movie posters and poster source notes
 │   └── WEB-INF/web.xml        Servlet declarations and URL mappings
 ├── README.md
+├── Dockerfile                  Multi-stage Tomcat 9 build and runtime image
+├── docker-entrypoint.sh        Uses Render's PORT and runs Tomcat in foreground
+├── .dockerignore               Excludes generated classes and local secrets
 └── .gitignore
 ```
 
