@@ -1,0 +1,2 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ include file="/includes/header.jspf" %><section class="error-page"><div class="confirm-icon">!</div><div class="eyebrow">A SMALL INTERRUPTION</div><% if(Boolean.TRUE.equals(request.getAttribute("movieNotFound"))){ %><h1>Movie <em>not found.</em></h1><% }else{ %><h1>We lost <em>the plot.</em></h1><% } %><p>${errorMessage}</p><a class="button button-primary" href="<%=ctx%>/movies">Back to the films ↗</a></section><%@ include file="/includes/footer.jspf" %>

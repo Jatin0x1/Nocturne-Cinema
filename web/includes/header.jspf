@@ -1,0 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<% String ctx = request.getContextPath(); %>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#090910"><title>Nocturne Cinema</title><link rel="stylesheet" href="<%=ctx%>/css/style.css"></head><body>
+<header class="site-header"><a class="brand" href="<%=ctx%>/home"><span class="brand-mark">N</span><span>NOCTURNE<small> CINEMA CLUB</small></span></a><button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button><nav class="main-nav"><a href="<%=ctx%>/home">Home</a><a href="<%=ctx%>/movies">Movies</a><a href="<%=ctx%>/bookings">My Bookings</a><a href="<%=ctx%>/home#about">About</a></nav><a class="nav-cta" href="<%=ctx%>/movies">Book a seat <span>↗</span></a></header>
+<main>
